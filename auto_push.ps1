@@ -47,13 +47,18 @@ function Invoke-GitSync {
     if ($LASTEXITCODE -eq 0) {
         Write-Host "[$Timestamp] SUCCESS: Pushed changes to GitHub!" -ForegroundColor Green
     } else {
-        # Attempt setting upstream branch
+        # Attempt setting upstream branch or force sync latest local state
         $UpstreamResult = git push -u origin main 2>&1
         if ($LASTEXITCODE -eq 0) {
             Write-Host "[$Timestamp] SUCCESS: Set upstream and pushed changes to GitHub!" -ForegroundColor Green
         } else {
-            Write-Host "[$Timestamp] ERROR: Push failed." -ForegroundColor Red
-            Write-Host $PushOutput -ForegroundColor DarkRed
+            $ForceResult = git push -f origin main 2>&1
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "[$Timestamp] SUCCESS: Force pushed latest local version to GitHub!" -ForegroundColor Green
+            } else {
+                Write-Host "[$Timestamp] ERROR: Push failed." -ForegroundColor Red
+                Write-Host $PushOutput -ForegroundColor DarkRed
+            }
         }
     }
 }
