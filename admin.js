@@ -409,3 +409,37 @@ function handleChangePinSettings(e) {
     closeModal('change-pin-modal');
     showToast('تم حفظ إعدادات الرمز السري ورقم الاستعادة بنجاح! 🔒');
 }
+
+// Live Clock Update
+function startAdminClock() {
+    const clockEl = document.getElementById('admin-live-clock');
+    if (!clockEl) return;
+    const update = () => {
+        const now = new Date();
+        clockEl.textContent = '🕒 ' + now.toLocaleTimeString('ar-IQ');
+    };
+    update();
+    setInterval(update, 1000);
+}
+
+// Live Filter Products Table
+function filterAdminProductsTable(query) {
+    const tableBody = document.getElementById('admin-products-table-body');
+    if (!tableBody) return;
+    const q = (query || '').toLowerCase().trim();
+    const rows = tableBody.querySelectorAll('tr');
+    rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+// Start clock on initialization
+document.addEventListener('DOMContentLoaded', () => {
+    startAdminClock();
+});
+

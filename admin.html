@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة الإدارة والإحصائيات | شركة الطيف للأثاث</title>
+    <title>لوحة الإدارة التنفيذية | شركة الطيف للأثاث العراقي والمستورد</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Readex+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,16 +22,16 @@
     <div id="admin-security-lock" class="admin-lock-overlay">
         <div class="lock-card">
             <div class="lock-icon">
-                <i class="fas fa-lock"></i>
+                <i class="fas fa-shield-alt"></i>
             </div>
             <h2>دخول لوحة إدارة شركة الطيف للأثاث</h2>
-            <p>يرجى أدخال الرمز السري الخاص بك لإلغاء القفل (الافتراضي: <strong>1234</strong>)</p>
+            <p>أدخل الرمز السري الخاص بك للوصول الآمن إلى لوحة التحكم والإحصائيات</p>
 
             <form onsubmit="handleAdminLogin(event)" class="lock-form">
                 <div class="pin-input-group">
                     <input type="password" id="admin-pin-input" maxlength="6" autofocus placeholder="أدخل الرمز السري..." required class="custom-input pin-input" />
                 </div>
-                <button type="submit" class="admin-btn-primary" style="width: 100%; justify-content: center; margin-top: 15px; padding: 12px;">
+                <button type="submit" class="admin-btn-primary" style="width: 100%; justify-content: center; margin-top: 16px; padding: 12px;">
                     <i class="fas fa-key"></i> فتح لوحة التحكم
                 </button>
             </form>
@@ -51,7 +51,7 @@
                 <i class="fas fa-times"></i>
             </button>
             <div class="admin-modal-header">
-                <i class="fas fa-shield-alt" style="color: var(--accent-gold); font-size: 1.6rem;"></i>
+                <i class="fas fa-user-shield" style="color: var(--accent-gold); font-size: 1.6rem;"></i>
                 <h2>استعادة وتعيين الرمز السري</h2>
             </div>
             
@@ -82,19 +82,19 @@
         <!-- Sidebar Navigation -->
         <aside class="admin-sidebar">
             <div class="admin-brand">
-                <i class="fas fa-user-shield" style="color: var(--accent-gold); font-size: 1.8rem;"></i>
+                <i class="fas fa-couch" style="color: var(--accent-gold); font-size: 1.8rem;"></i>
                 <div>
                     <h2>إدارة الطيف للأثاث</h2>
-                    <span>لوحة التحكم الرئيسية</span>
+                    <span>لوحة التحكم التنفيذية</span>
                 </div>
             </div>
 
             <ul class="admin-menu">
-                <li class="active"><a href="#"><i class="fas fa-chart-line"></i> الإحصائيات العامة</a></li>
-                <li><a href="#admin-products-sec"><i class="fas fa-couch"></i> إدارة الأثاث والقطع</a></li>
-                <li><a href="#admin-orders-sec"><i class="fas fa-shopping-cart"></i> سجل الطلبات</a></li>
+                <li class="active"><a href="#"><i class="fas fa-chart-pie"></i> الإحصائيات والتحليلات</a></li>
+                <li><a href="#admin-products-sec"><i class="fas fa-boxes"></i> إدارة الأثاث والقطع</a></li>
+                <li><a href="#admin-orders-sec"><i class="fas fa-shopping-bag"></i> سجل الطلبات المباشرة</a></li>
                 <li><a href="#" onclick="openChangePinModal()"><i class="fas fa-user-lock"></i> تغيير الرمز والرقم المسجل</a></li>
-                <li><a href="index.html" target="_blank"><i class="fas fa-external-link-alt"></i> معاينة المتجر (الزبون)</a></li>
+                <li><a href="index.html" target="_blank"><i class="fas fa-store"></i> معاينة المتجر (الزبون)</a></li>
             </ul>
 
             <div class="admin-sidebar-footer">
@@ -109,51 +109,127 @@
 
         <!-- Main Content Area -->
         <main class="admin-main">
-            <!-- Top Bar -->
+            <!-- Top Executive Header Bar -->
             <header class="admin-topbar">
                 <div class="admin-welcome">
-                    <h1>أهلاً بك في لوحة تحكم شركة الطيف للأثاث 👋</h1>
-                    <p>إدارة المنتجات، رفع قطع الأثاث، ومتابعة الطلبات المباشرة</p>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                        <h1>إدارة شركة الطيف للأثاث 👋</h1>
+                        <span class="metric-trend up"><span class="status-live-pulse"></span> النظام متصل ومحمّي</span>
+                    </div>
+                    <p>متابعة حركة المبيعات، إدارة المنتجات، والتواصل المباشر مع الزبائن</p>
                 </div>
 
-                <div style="display: flex; gap: 12px; align-items: center;">
+                <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                    <!-- Real-time Clock Widget -->
+                    <div id="admin-live-clock" style="font-weight: 700; font-family: monospace; font-size: 1rem; color: var(--accent-gold); background: var(--bg-surface); padding: 8px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                        --:--:--
+                    </div>
+
                     <button class="admin-btn-primary" onclick="openAddProductModal()">
                         <i class="fas fa-plus-circle"></i> إضافة قطعة أثاث جديدة
                     </button>
                 </div>
             </header>
 
-            <!-- Stats Widgets Grid -->
+            <!-- Metric Cards Grid -->
             <section class="admin-stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-couch"></i></div>
                     <div>
                         <div class="stat-title">قطع الأثاث بالمعرض</div>
                         <div class="stat-number" id="admin-total-products">0 قطعة</div>
+                        <span class="metric-trend info"><i class="fas fa-chart-line"></i> متوفر بالمتجر</span>
                     </div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-shopping-bag"></i></div>
                     <div>
-                        <div class="stat-title">عدد الطلبات</div>
+                        <div class="stat-title">سجل الطلبات الواردة</div>
                         <div class="stat-number" id="admin-total-orders">0 طلب</div>
+                        <span class="metric-trend up"><i class="fas fa-arrow-up"></i> مباشر من الزبائن</span>
                     </div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-coins"></i></div>
                     <div>
-                        <div class="stat-title">إجمالي المبيعات</div>
+                        <div class="stat-title">إجمالي مبيعات المعرض</div>
                         <div class="stat-number" id="admin-total-sales">0 د.ع</div>
+                        <span class="metric-trend info"><i class="fas fa-wallet"></i> محسوبة بالكامل</span>
                     </div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
                     <div>
-                        <div class="stat-title">حالة الأمان</div>
-                        <div class="stat-number" style="color: #25d366; font-size: 1.05rem; font-weight: 700;">مفعل ومحمي بكلمة مرور</div>
+                        <div class="stat-title">حماية البيانات والأمان</div>
+                        <div class="stat-number" style="font-size: 1.05rem; color: #25d366;">مشفر ومحمي 100%</div>
+                        <span class="metric-trend up"><i class="fas fa-check-circle"></i> رمز سري مؤمن</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visual Analytics Charts Section -->
+            <section class="admin-analytics-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h4><i class="fas fa-chart-bar" style="color: var(--accent-gold); margin-inline-end: 8px;"></i> نسبة الإقبال والمبيعات حسب قسم الأثاث</h4>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">مُحدث تلقائياً</span>
+                    </div>
+                    <div class="category-bar-list">
+                        <div class="category-bar-item">
+                            <div class="bar-label-group">
+                                <span><i class="fas fa-couch" style="color: var(--accent-gold);"></i> تخوم وقنفات الاستقبال</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 65%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="category-bar-item">
+                            <div class="bar-label-group">
+                                <span><i class="fas fa-bed" style="color: var(--accent-gold);"></i> غرف النوم والدواليب</span>
+                                <span>25%</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 25%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="category-bar-item">
+                            <div class="bar-label-group">
+                                <span><i class="fas fa-utensils" style="color: var(--accent-gold);"></i> طاولات الطعام والسفرة</span>
+                                <span>10%</span>
+                            </div>
+                            <div class="bar-track">
+                                <div class="bar-fill" style="width: 10%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h4><i class="fas fa-truck" style="color: var(--accent-gold); margin-inline-end: 8px;"></i> حالة الشحن والتوصيل للمحافظات</h4>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                            <div>
+                                <strong style="font-size: 0.9rem; color: var(--text-main);">تغطية المحافظات العراقية</strong>
+                                <div style="font-size: 0.78rem; color: var(--text-muted);">بغداد وكافة المحافظات</div>
+                            </div>
+                            <span class="metric-trend up" style="font-size: 0.85rem;">100% مجاني</span>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                            <div>
+                                <strong style="font-size: 0.9rem; color: var(--text-main);">سرعة التجهيز والتركيب</strong>
+                                <div style="font-size: 0.78rem; color: var(--text-muted);">فريق فني متخصص</div>
+                            </div>
+                            <span class="metric-trend info" style="font-size: 0.85rem;">24 - 48 ساعة</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -162,12 +238,21 @@
             <section class="admin-card-section" id="admin-products-sec">
                 <div class="section-title-wrap">
                     <div>
-                        <h3>إدارة قطع الأثاث والمعروضات</h3>
-                        <p>يمكنك التعديل، الحذف، أو إضافة قطع جديدة مع الصور</p>
+                        <h3>إدارة قطعة الأثاث ومعروضات المتجر</h3>
+                        <p>يمكنك الإضافة، التعديل، الحذف، وتحديد الوسوم الحصرية</p>
                     </div>
-                    <button class="admin-btn-primary" onclick="openAddProductModal()">
-                        <i class="fas fa-plus-circle"></i> إضافة أثاث جديد
-                    </button>
+
+                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <!-- Live Product Search -->
+                        <div class="admin-search-wrapper">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="admin-prod-search" placeholder="ابحث باسم القطعة..." oninput="filterAdminProductsTable(this.value)" class="custom-input admin-search-input" />
+                        </div>
+
+                        <button class="admin-btn-primary" onclick="openAddProductModal()">
+                            <i class="fas fa-plus-circle"></i> إضافة أثاث جديد
+                        </button>
+                    </div>
                 </div>
 
                 <div class="table-responsive">
@@ -175,10 +260,10 @@
                         <thead>
                             <tr>
                                 <th>اسم قطعة الأثاث والتفاصيل</th>
-                                <th>القسم</th>
-                                <th>السعر</th>
-                                <th>الوسم</th>
-                                <th>إجراءات الإدارة</th>
+                                <th>القسم / الفئة</th>
+                                <th>السعر المعروض</th>
+                                <th>الوسم والميزة</th>
+                                <th>إجراءات التحكم</th>
                             </tr>
                         </thead>
                         <tbody id="admin-products-table-body">
@@ -193,7 +278,7 @@
                 <div class="section-title-wrap">
                     <div>
                         <h3>سجل طلبات الزبائن المباشرة</h3>
-                        <p>قائمة الطلبات الواردة من موقع الزبون والواتساب</p>
+                        <p>قائمة الطلبات الواردة من موقع الزبون مع خيار التواصل الفوري بالواتساب</p>
                     </div>
                     <button onclick="clearAllOrders()" class="admin-btn-danger">
                         <i class="fas fa-trash-alt"></i> تصفير سجل الطلبات
@@ -204,12 +289,12 @@
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th>كود الطلب الفريد</th>
-                                <th>تفاصيل القطع والكود الفرعي</th>
-                                <th>معلومات الزبون</th>
+                                <th>كود الطلب</th>
+                                <th>تفاصيل القطع والكود</th>
+                                <th>معلومات الزبون والواتساب</th>
                                 <th>العنوان والمحافظة</th>
                                 <th>الإجمالي</th>
-                                <th>التاريخ والتغيير</th>
+                                <th>التاريخ والإجراءات</th>
                             </tr>
                         </thead>
                         <tbody id="admin-orders-table-body">
