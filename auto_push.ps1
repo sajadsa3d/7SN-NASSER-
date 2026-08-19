@@ -31,31 +31,29 @@ function Invoke-GitSync {
 
     $Status = git status --porcelain
     if ([string]::IsNullOrWhitespace($Status)) {
-        return $false
+        Write-Host "[+] Repository is up to date. No pending changes." -ForegroundColor DarkGray
+        return
     }
 
     $Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     Write-Host ""
     Write-Host "[$Timestamp] Changes detected! Pushing to GitHub..." -ForegroundColor Yellow
 
-    git add -A
+    git add -A | Out-Null
     $CommitMsg = "$Reason - $Timestamp"
-    git commit -m $CommitMsg
+    git commit -m $CommitMsg | Out-Null
     
     $PushOutput = git push origin main 2>&1
     if ($LASTEXITCODE -eq 0) {
         Write-Host "[$Timestamp] SUCCESS: Pushed changes to GitHub!" -ForegroundColor Green
-        return $true
     } else {
         # Attempt setting upstream branch
         $UpstreamResult = git push -u origin main 2>&1
         if ($LASTEXITCODE -eq 0) {
             Write-Host "[$Timestamp] SUCCESS: Set upstream and pushed changes to GitHub!" -ForegroundColor Green
-            return $true
         } else {
             Write-Host "[$Timestamp] ERROR: Push failed." -ForegroundColor Red
             Write-Host $PushOutput -ForegroundColor DarkRed
-            return $false
         }
     }
 }
