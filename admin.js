@@ -238,6 +238,8 @@ function handleSaveProduct(e) {
     const isBestseller = document.getElementById('prod-form-isbestseller').checked;
     const desc = document.getElementById('prod-form-desc').value.trim();
 
+    const FALLBACK_IMG = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%231a1a24'/><text x='200' y='130' font-family='sans-serif' font-size='48' text-anchor='middle' fill='%23d89b37'>&#128717;</text><text x='200' y='185' font-family='sans-serif' font-size='18' text-anchor='middle' fill='%238888a0'>صورة غير متوفرة</text></svg>`;
+
     const newProduct = {
         id: `prod-${Date.now()}`,
         name,
@@ -250,7 +252,7 @@ function handleSaveProduct(e) {
         reviewsCount: 1,
         isNew,
         isBestseller,
-        image: adminState.currentImageBase64 || 'images/luxury_sofa_set.png',
+        image: adminState.currentImageBase64 || FALLBACK_IMG,
         material: material || 'خشب طبيعي عالي الجودة مع تنجيد فاخر',
         dimensions: dimensions || 'حسب الطلب والقياس',
         description: desc || 'قطعة أثاث فاخرة تم تصنيعها وتفصيلها بأعلى معايير الإتقان.'
@@ -261,6 +263,11 @@ function handleSaveProduct(e) {
     refreshAdminData();
     closeModal('add-product-modal');
     e.target.reset();
+    // Reset image preview
+    const preview = document.getElementById('img-preview');
+    const placeholder = document.getElementById('img-placeholder');
+    if (preview) { preview.src = ''; preview.style.display = 'none'; }
+    if (placeholder) placeholder.style.display = 'block';
     adminState.currentImageBase64 = '';
     showToast(`تمت إضافة "${name}" بنجاح إلى المعرض! 🎉`);
 }
@@ -354,10 +361,39 @@ function handleChangePinSettings(e) {
     showToast('تم حفظ الرمز السري ورقم الاستعادة بنجاح 🔒');
 }
 
+// ==================== IMAGE UPLOAD ====================
+function handleAdminImageUpload(input) {
+    const file = input.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+        showToast('حجم الصورة كبير جداً! الحد الأقصى 5MB', true);
+        input.value = '';
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        adminState.currentImageBase64 = e.target.result;
+        const preview = document.getElementById('img-preview');
+        const placeholder = document.getElementById('img-placeholder');
+        if (preview) { preview.src = e.target.result; preview.style.display = 'block'; }
+        if (placeholder) placeholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+}
+
 // ==================== MODAL HELPERS ====================
 function openModal(id) { const m = document.getElementById(id); if (m) m.classList.add('active'); }
 function closeModal(id) { const m = document.getElementById(id); if (m) m.classList.remove('active'); }
-function openAddProductModal() { adminState.currentImageBase64 = ''; openModal('add-product-modal'); }
+function openAddProductModal() {
+    adminState.currentImageBase64 = '';
+    const preview = document.getElementById('img-preview');
+    const placeholder = document.getElementById('img-placeholder');
+    const imgInput = document.getElementById('prod-img-input');
+    if (preview) { preview.src = ''; preview.style.display = 'none'; }
+    if (placeholder) placeholder.style.display = 'block';
+    if (imgInput) imgInput.value = '';
+    openModal('add-product-modal');
+}
 function openChangePinModal() {
     document.getElementById('new-pin-setting').value = getAdminPin();
     document.getElementById('new-phone-setting').value = getRecoveryPhone();

@@ -1017,6 +1017,25 @@
             <div class="modal-close" onclick="closeModal('add-product-modal')"><i class="fas fa-times"></i></div>
         </div>
         <form onsubmit="handleSaveProduct(event)" class="admin-product-form">
+
+            <!-- Image Upload -->
+            <div class="form-group">
+                <label>صورة المنتج <span style="color:var(--ad-muted); font-weight:400;">(اختياري)</span></label>
+                <div id="img-upload-area" onclick="document.getElementById('prod-img-input').click()" style="
+                    border: 2px dashed var(--ad-border); border-radius: var(--radius-md);
+                    padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s;
+                    background: rgba(255,255,255,0.02);
+                " onmouseenter="this.style.borderColor='var(--gold)'" onmouseleave="this.style.borderColor='var(--ad-border)'">
+                    <img id="img-preview" src="" alt="" style="display:none; max-height:140px; border-radius:var(--radius-sm); margin-bottom:10px; object-fit:cover; width:100%;" />
+                    <div id="img-placeholder">
+                        <i class="fas fa-cloud-upload-alt" style="font-size:2rem; color:var(--gold); margin-bottom:8px;"></i>
+                        <p style="font-size:0.83rem; color:var(--ad-muted);">اضغط لرفع صورة المنتج</p>
+                        <p style="font-size:0.75rem; color:var(--ad-subtle); margin-top:4px;">JPG، PNG، WEBP — حجم أقصى 5MB</p>
+                    </div>
+                </div>
+                <input type="file" id="prod-img-input" accept="image/*" style="display:none" onchange="handleAdminImageUpload(this)" />
+            </div>
+
             <div class="grid-2">
                 <div class="form-group">
                     <label>اسم القطعة <span class="req">*</span></label>

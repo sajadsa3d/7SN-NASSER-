@@ -206,19 +206,14 @@ const TRANSLATIONS = {
 
 // Helper function to safely get initial products with fallbacks
 function getInitialProducts() {
-    // Force clear products cache (v6.0)
-    if (localStorage.getItem('altief_cache_v') !== '6.0') {
-        localStorage.removeItem('altief_products');
-        localStorage.setItem('altief_cache_v', '6.0');
+    // Always read from localStorage first (admin-published products)
+    const stored = JSON.parse(localStorage.getItem('altief_products') || 'null');
+    if (stored && Array.isArray(stored)) {
+        return stored;
     }
-
+    // Fallback to hardcoded PRODUCTS_DATA if exists and not empty
     const defaultData = (typeof PRODUCTS_DATA !== 'undefined' && Array.isArray(PRODUCTS_DATA) && PRODUCTS_DATA.length > 0) ? PRODUCTS_DATA : [];
-    if (defaultData.length === 0) {
-        localStorage.removeItem('altief_products');
-        return [];
-    }
-    const stored = JSON.parse(localStorage.getItem('altief_products'));
-    return stored || defaultData;
+    return defaultData;
 }
 
 // Initial App State
@@ -267,6 +262,15 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWishlistUI();
     setupEventListeners();
     renderAdminStats();
+
+    // Live sync: when admin adds/deletes products in another tab, update store instantly
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'altief_products') {
+            state.products = getInitialProducts();
+            state.filteredProducts = state.products;
+            renderProducts();
+        }
+    });
 });
 
 // Language Initialization & Toggle
