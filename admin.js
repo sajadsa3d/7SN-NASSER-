@@ -361,22 +361,51 @@ function handleChangePinSettings(e) {
     showToast('تم حفظ الرمز السري ورقم الاستعادة بنجاح 🔒');
 }
 
-// ==================== IMAGE UPLOAD ====================
+// ==================== IMAGE UPLOAD & COMPRESSION ====================
 function handleAdminImageUpload(input) {
     const file = input.files[0];
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-        showToast('حجم الصورة كبير جداً! الحد الأقصى 5MB', true);
-        input.value = '';
-        return;
-    }
+    
+    // Read the file and compress it using Canvas to avoid LocalStorage 5MB limits
     const reader = new FileReader();
     reader.onload = function(e) {
-        adminState.currentImageBase64 = e.target.result;
-        const preview = document.getElementById('img-preview');
-        const placeholder = document.getElementById('img-placeholder');
-        if (preview) { preview.src = e.target.result; preview.style.display = 'block'; }
-        if (placeholder) placeholder.style.display = 'none';
+        const img = new Image();
+        img.onload = function() {
+            // Setup canvas for compression
+            const canvas = document.createElement('canvas');
+            const MAX_WIDTH = 800; // max width
+            const MAX_HEIGHT = 800; // max height
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width;
+                    width = MAX_WIDTH;
+                }
+            } else {
+                if (height > MAX_HEIGHT) {
+                    width *= MAX_HEIGHT / height;
+                    height = MAX_HEIGHT;
+                }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Compress to JPEG with 0.7 quality (drastically reduces base64 size)
+            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+            
+            adminState.currentImageBase64 = compressedBase64;
+            
+            const preview = document.getElementById('img-preview');
+            const placeholder = document.getElementById('img-placeholder');
+            if (preview) { preview.src = compressedBase64; preview.style.display = 'block'; }
+            if (placeholder) placeholder.style.display = 'none';
+        };
+        img.src = e.target.result;
     };
     reader.readAsDataURL(file);
 }
