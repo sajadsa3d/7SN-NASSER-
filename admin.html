@@ -31,7 +31,7 @@
                 <div class="pin-input-group">
                     <input type="password" id="admin-pin-input" maxlength="6" autofocus placeholder="أدخل الرمز السري..." required class="custom-input pin-input" />
                 </div>
-                <button type="submit" class="checkout-btn" style="background: var(--accent-gold); width: 100%; margin-top: 15px;">
+                <button type="submit" class="admin-btn-primary" style="width: 100%; justify-content: center; margin-top: 15px; padding: 12px;">
                     <i class="fas fa-key"></i> فتح لوحة التحكم
                 </button>
             </form>
@@ -66,11 +66,11 @@
                 </div>
 
                 <div class="form-group" style="margin-bottom: 18px;">
-                    <label>الرمز السري الجديد المطلوبة</label>
+                    <label>الرمز السري الجديد المطلوب</label>
                     <input type="password" id="reset-new-pin-input" required placeholder="أدخل الرمز الجديد (مثال: 5566)" class="custom-input" />
                 </div>
 
-                <button type="submit" class="checkout-btn" style="background: var(--accent-gold); width: 100%;">
+                <button type="submit" class="admin-btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
                     <i class="fas fa-check-circle"></i> تأكيد وإعادة تعيين الرمز السري
                 </button>
             </form>
@@ -98,10 +98,10 @@
             </ul>
 
             <div class="admin-sidebar-footer">
-                <button onclick="lockAdminDashboard()" class="checkout-btn" style="background: rgba(230,57,70,0.15); color: #e63946; border: 1px solid #e63946; text-align: center; width: 100%; margin-bottom: 10px; cursor: pointer;">
+                <button onclick="lockAdminDashboard()" class="admin-btn-danger" style="width: 100%; justify-content: center; margin-bottom: 8px;">
                     <i class="fas fa-lock"></i> قفل اللوحة (خروج)
                 </button>
-                <a href="index.html" class="checkout-btn" style="background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); text-align: center; text-decoration: none; display: block;">
+                <a href="index.html" class="admin-btn-outline" style="width: 100%; justify-content: center;">
                     <i class="fas fa-arrow-right"></i> العودة لمتجر الزبائن
                 </a>
             </div>
@@ -117,7 +117,7 @@
                 </div>
 
                 <div style="display: flex; gap: 12px; align-items: center;">
-                    <button class="checkout-btn" onclick="openAddProductModal()" style="background: var(--accent-gold); white-space: nowrap;">
+                    <button class="admin-btn-primary" onclick="openAddProductModal()">
                         <i class="fas fa-plus-circle"></i> إضافة قطعة أثاث جديدة
                     </button>
                 </div>
@@ -153,7 +153,7 @@
                     <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
                     <div>
                         <div class="stat-title">حالة الأمان</div>
-                        <div class="stat-number" style="color: #25d366; font-size: 1.1rem;">مفرس ومحمي بكلمة مرور</div>
+                        <div class="stat-number" style="color: #25d366; font-size: 1.05rem; font-weight: 700;">مفعل ومحمي بكلمة مرور</div>
                     </div>
                 </div>
             </section>
@@ -165,7 +165,7 @@
                         <h3>إدارة قطع الأثاث والمعروضات</h3>
                         <p>يمكنك التعديل، الحذف، أو إضافة قطع جديدة مع الصور</p>
                     </div>
-                    <button class="checkout-btn" onclick="openAddProductModal()" style="background: var(--accent-gold); max-width: 200px;">
+                    <button class="admin-btn-primary" onclick="openAddProductModal()">
                         <i class="fas fa-plus-circle"></i> إضافة أثاث جديد
                     </button>
                 </div>
@@ -195,7 +195,7 @@
                         <h3>سجل طلبات الزبائن المباشرة</h3>
                         <p>قائمة الطلبات الواردة من موقع الزبون والواتساب</p>
                     </div>
-                    <button onclick="clearAllOrders()" class="action-btn" style="background: rgba(230,57,70,0.15); color: #e63946; border: 1px solid #e63946; padding: 8px 16px; border-radius: var(--radius-md); font-weight: 700; cursor: pointer;">
+                    <button onclick="clearAllOrders()" class="admin-btn-danger">
                         <i class="fas fa-trash-alt"></i> تصفير سجل الطلبات
                     </button>
                 </div>
@@ -244,7 +244,7 @@
                     <input type="tel" id="new-phone-setting" required placeholder="07838669228..." class="custom-input" />
                 </div>
 
-                <button type="submit" class="checkout-btn" style="background: var(--accent-gold); width: 100%;">
+                <button type="submit" class="admin-btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
                     <i class="fas fa-save"></i> حفظ التغيرات وإعدادات الأمان
                 </button>
             </form>
@@ -294,8 +294,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="form-grid-2">
                     <div class="form-group">
                         <label>نوع الخشب والخامات</label>
@@ -326,10 +324,10 @@
                 </div>
 
                 <div style="display: flex; gap: 12px; margin-top: 24px;">
-                    <button type="submit" class="checkout-btn" style="background: var(--accent-gold);">
+                    <button type="submit" class="admin-btn-primary">
                         <i class="fas fa-save"></i> حفظ ونشر الأثاث بالمتجر
                     </button>
-                    <button type="button" onclick="closeModal('add-product-modal')" class="checkout-btn" style="background: rgba(255,255,255,0.1); border: 1px solid var(--border-color);">
+                    <button type="button" onclick="closeModal('add-product-modal')" class="admin-btn-outline">
                         إلغاء
                     </button>
                 </div>
