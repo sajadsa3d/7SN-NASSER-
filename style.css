@@ -1861,6 +1861,364 @@ input::placeholder, textarea::placeholder, select::placeholder, .custom-input::p
     box-shadow: var(--card-shadow);
 }
 
+/* ======================================================
+   Comprehensive Mobile & Tablet Responsive Layout Rules
+   ====================================================== */
+
+/* Tablets & Small Laptops (<= 992px) */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 12px 4%;
+    }
+    .nav-links {
+        gap: 16px;
+    }
+    .nav-link {
+        font-size: 0.88rem;
+    }
+    .hero-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 40px 4% 30px;
+        text-align: center;
+    }
+    .hero-tag {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    .hero-desc {
+        font-size: 1.05rem;
+        text-align: center;
+        max-width: 90%;
+        margin: 0 auto 24px;
+    }
+    .hero-search-box {
+        margin: 0 auto 20px;
+        max-width: 550px;
+    }
+    .hero-social-proof {
+        justify-content: center;
+    }
+    .hero-banner-image {
+        height: 320px;
+    }
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 16px;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    .about-grid, .contact-grid, .story-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+/* Mobile Phones (<= 768px) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    
+    /* Top Announcement Bar */
+    .announcement-bar {
+        flex-direction: column !important;
+        text-align: center;
+        padding: 8px 12px !important;
+        gap: 6px !important;
+        font-size: 0.78rem !important;
+    }
+    .announcement-bar div {
+        justify-content: center !important;
+        width: 100%;
+    }
+
+    /* Navbar */
+    .navbar {
+        padding: 10px 12px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .nav-brand {
+        gap: 8px;
+    }
+    .brand-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
+    .brand-name {
+        font-size: 1.25rem;
+    }
+    .nav-links {
+        display: none; /* Hide main links on phone header to prevent clutter */
+    }
+    .nav-actions {
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    .action-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.92rem;
+    }
+    .social-badge-btn {
+        display: none !important; /* Keep essential cart/wishlist/theme/lang buttons clean */
+    }
+    .lang-toggle-btn {
+        padding: 4px 10px !important;
+        font-size: 0.78rem !important;
+    }
+    .badge-count {
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+        top: -3px;
+        left: -3px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 24px 12px 20px;
+        gap: 20px;
+    }
+    .hero-tag {
+        font-size: 0.78rem;
+        padding: 5px 12px;
+    }
+    .hero-title {
+        font-size: 1.75rem;
+        line-height: 1.3;
+        margin-bottom: 12px;
+    }
+    .hero-desc {
+        font-size: 0.92rem;
+        line-height: 1.55;
+        margin-bottom: 18px;
+    }
+    .hero-search-box {
+        padding: 6px 10px;
+        flex-direction: row;
+        gap: 6px;
+        border-radius: var(--radius-md);
+    }
+    .hero-search-box input {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+    .hero-search-btn {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        border-radius: var(--radius-sm);
+        white-space: nowrap;
+    }
+    .hero-insta-link {
+        font-size: 0.82rem !important;
+        padding: 8px 12px !important;
+        width: 100%;
+        justify-content: center;
+    }
+    .hero-banner-image {
+        height: 240px;
+        border-radius: var(--radius-md);
+    }
+    .hero-glass-badge {
+        bottom: 12px;
+        right: 12px;
+        left: 12px;
+        padding: 10px 14px;
+        gap: 10px;
+    }
+    .badge-stat {
+        font-size: 1.1rem;
+    }
+    .badge-label {
+        font-size: 0.75rem;
+    }
+
+    /* Categories Horizontal Scroll Bar */
+    .categories-container {
+        display: flex;
+        overflow-x: auto;
+        flex-wrap: nowrap !important;
+        gap: 8px;
+        padding: 4px 12px 12px;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+    .categories-container::-webkit-scrollbar {
+        display: none;
+    }
+    .category-pill {
+        flex-shrink: 0;
+        white-space: nowrap;
+        padding: 8px 14px;
+        font-size: 0.82rem;
+        border-radius: var(--radius-full);
+    }
+
+    /* Products Section */
+    .catalog-section {
+        padding: 30px 12px;
+    }
+    .section-header {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .section-title {
+        font-size: 1.5rem;
+    }
+    .section-subtitle {
+        font-size: 0.88rem;
+    }
+
+    /* 2-Column Mobile E-Commerce Product Grid */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+    .product-card {
+        padding: 10px;
+        border-radius: var(--radius-md);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .product-image {
+        height: 150px;
+        border-radius: var(--radius-sm);
+    }
+    .product-info {
+        padding: 8px 2px 2px;
+    }
+    .product-category {
+        font-size: 0.72rem;
+    }
+    .product-title {
+        font-size: 0.88rem;
+        margin-bottom: 6px;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 2.3em;
+    }
+    .product-price {
+        font-size: 0.92rem;
+        margin-bottom: 8px;
+    }
+    .old-price {
+        font-size: 0.75rem;
+    }
+    .product-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .product-btn {
+        width: 100%;
+        padding: 7px 8px;
+        font-size: 0.76rem;
+        justify-content: center;
+        border-radius: var(--radius-sm);
+    }
+
+    /* Cart Drawer Mobile */
+    .cart-drawer {
+        width: 100vw !important;
+        max-width: 100% !important;
+    }
+
+    /* Modals Mobile */
+    .modal-content, .quick-view-card, .checkout-modal {
+        width: 94% !important;
+        max-width: 94vw !important;
+        padding: 16px !important;
+        border-radius: var(--radius-md) !important;
+        max-height: 90vh !original;
+        overflow-y: auto;
+        margin: 5vh auto !important;
+    }
+    .quick-view-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+    .quick-view-img {
+        height: 200px !important;
+    }
+    .checkout-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .stat-card {
+        padding: 14px 10px;
+    }
+    .stat-number {
+        font-size: 1.35rem;
+    }
+    .stat-label {
+        font-size: 0.78rem;
+    }
+
+    /* Floating WhatsApp Button Mobile */
+    .floating-whatsapp-btn {
+        bottom: 16px !important;
+        left: 14px !important;
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.4rem !important;
+    }
+    .whatsapp-tooltip {
+        display: none !important;
+    }
+
+    /* Footer Mobile */
+    .footer {
+        padding: 30px 14px 20px;
+    }
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
+    }
+    .footer-brand {
+        align-items: center;
+    }
+}
+
+/* Small Screen Mobile Phones (<= 400px) */
+@media (max-width: 400px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+    .product-image {
+        height: 130px;
+    }
+    .product-title {
+        font-size: 0.82rem;
+    }
+    .product-price {
+        font-size: 0.85rem;
+    }
+    .hero-title {
+        font-size: 1.5rem;
+    }
+}
+
+
 
 
 
