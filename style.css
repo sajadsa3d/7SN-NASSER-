@@ -7,31 +7,31 @@ img {
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-    /* Exact Color Swatch from User Image (#ADD6BD) */
-    --bg-main: #add6bd;
-    --bg-surface: #add6bd;
-    --bg-card: #a0ceb2;
-    --bg-glass: rgba(173, 214, 189, 0.96);
-    --border-color: #8ac0a0;
+    /* ===== BLACK & GOLD LUXURY THEME ===== */
+    --bg-main: #0d0b07;
+    --bg-surface: #111009;
+    --bg-card: #18150e;
+    --bg-glass: rgba(17, 16, 9, 0.97);
+    --border-color: rgba(216,155,55,0.18);
     
-    --text-main: #061c12;
-    --text-muted: #0c3322;
-    --text-light: #164832;
+    --text-main: #f5e9d0;
+    --text-muted: #c9ad82;
+    --text-light: #a08858;
     
-    --brand-mint: #add6bd;
-    --brand-mint-dark: #061c12;
-    --brand-mint-light: rgba(6, 28, 18, 0.12);
+    --brand-mint: #d89b37;
+    --brand-mint-dark: #0d0b07;
+    --brand-mint-light: rgba(216, 155, 55, 0.10);
     
     --accent-gold: #d89b37;
-    --accent-gold-hover: #b87c20;
-    --accent-gold-light: rgba(216, 155, 55, 0.20);
+    --accent-gold-hover: #f0be5c;
+    --accent-gold-light: rgba(216, 155, 55, 0.18);
     
-    --accent-emerald: #061c12;
-    --accent-wood: #7c5230;
+    --accent-emerald: #c9a75a;
+    --accent-wood: #8b5e3c;
     
-    --card-shadow: 0 10px 30px -5px rgba(6, 28, 18, 0.12);
-    --hover-shadow: 0 20px 40px -10px rgba(6, 28, 18, 0.25);
-    --modal-overlay: rgba(6, 28, 18, 0.82);
+    --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
+    --hover-shadow: 0 20px 40px -10px rgba(216, 155, 55, 0.15);
+    --modal-overlay: rgba(0, 0, 0, 0.88);
     
     --radius-sm: 8px;
     --radius-md: 16px;
@@ -43,24 +43,24 @@ img {
 }
 
 [data-theme="dark"] {
-    --bg-main: #061c12;
-    --bg-surface: #0a2719;
-    --bg-card: #113624;
-    --bg-glass: rgba(10, 39, 25, 0.95);
-    --border-color: #1d523a;
+    --bg-main: #050505;
+    --bg-surface: #0a0900;
+    --bg-card: #100e07;
+    --bg-glass: rgba(5, 4, 0, 0.97);
+    --border-color: rgba(216,155,55,0.22);
     
-    --text-main: #a2dabf;
-    --text-muted: #d2f2e3;
-    --text-light: #7fcaa6;
+    --text-main: #f5e9d0;
+    --text-muted: #c9ad82;
+    --text-light: #a08858;
     
-    --brand-mint: #98d7b7;
+    --brand-mint: #f0be5c;
     --accent-gold: #f0be5c;
     --accent-gold-hover: #ffd175;
-    --accent-gold-light: rgba(240, 190, 92, 0.25);
+    --accent-gold-light: rgba(240, 190, 92, 0.22);
     
-    --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
-    --hover-shadow: 0 20px 40px -10px rgba(162, 218, 191, 0.30);
-    --modal-overlay: rgba(3, 13, 9, 0.92);
+    --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.75);
+    --hover-shadow: 0 20px 40px -10px rgba(216, 155, 55, 0.20);
+    --modal-overlay: rgba(0, 0, 0, 0.93);
 }
 
 /* Reset & Base Styles */
