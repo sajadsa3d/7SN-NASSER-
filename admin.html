@@ -3,428 +3,1259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة الإدارة التنفيذية | شركة الطيف للأثاث العراقي والمستورد</title>
-    
-    <!-- Google Fonts -->
+    <title>لوحة الإدارة التنفيذية | الطيف للأثاث</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Readex+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Main Style Sheet -->
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ============================
+           ADMIN EXECUTIVE DARK THEME
+           ============================ */
+        :root {
+            --ad-bg: #0c0c0f;
+            --ad-surface: #13131a;
+            --ad-card: #1a1a24;
+            --ad-card-hover: #1f1f2e;
+            --ad-border: rgba(255,255,255,0.06);
+            --ad-border-hover: rgba(197,155,39,0.4);
+            --ad-text: #f0f0f5;
+            --ad-muted: #8888a0;
+            --ad-subtle: #5a5a72;
+            --gold: #d89b37;
+            --gold-2: #f0be5c;
+            --gold-glow: rgba(216,155,55,0.18);
+            --gold-glow-strong: rgba(216,155,55,0.35);
+            --green: #22c55e;
+            --green-dim: rgba(34,197,94,0.12);
+            --red: #ef4444;
+            --red-dim: rgba(239,68,68,0.12);
+            --blue: #6366f1;
+            --blue-dim: rgba(99,102,241,0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+            --sidebar-w: 260px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cairo', 'Outfit', sans-serif;
+            background: var(--ad-bg);
+            color: var(--ad-text);
+            direction: rtl;
+            text-align: right;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ==================== LOCK SCREEN ==================== */
+        .lock-screen {
+            position: fixed; inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at 30% 50%, rgba(216,155,55,0.06) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 20%, rgba(99,102,241,0.05) 0%, transparent 50%),
+                        var(--ad-bg);
+        }
+
+        .lock-grid-bg {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+        }
+
+        .lock-container {
+            position: relative;
+            width: 420px;
+            padding: 44px 40px;
+            background: var(--ad-surface);
+            border: 1px solid var(--ad-border);
+            border-radius: var(--radius-xl);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.04),
+                        0 40px 80px rgba(0,0,0,0.6),
+                        0 0 80px rgba(216,155,55,0.05);
+            animation: lockIn 0.5s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        @keyframes lockIn {
+            from { opacity: 0; transform: scale(0.94) translateY(20px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .lock-logo {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .lock-logo-icon {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, var(--gold), #b87c20);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: #fff;
+            box-shadow: 0 4px 20px rgba(216,155,55,0.3);
+        }
+
+        .lock-logo-text h2 {
+            font-size: 1.1rem; font-weight: 800; color: var(--ad-text);
+            line-height: 1.2;
+        }
+
+        .lock-logo-text span {
+            font-size: 0.75rem; color: var(--ad-muted); font-weight: 500;
+        }
+
+        .lock-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--ad-border), transparent);
+            margin-bottom: 28px;
+        }
+
+        .lock-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 6px; }
+        .lock-subtitle { font-size: 0.85rem; color: var(--ad-muted); margin-bottom: 28px; line-height: 1.5; }
+
+        .lock-input-wrap {
+            position: relative; margin-bottom: 16px;
+        }
+
+        .lock-input-icon {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            right: 16px; color: var(--gold); font-size: 0.95rem;
+        }
+
+        .lock-input {
+            width: 100%;
+            padding: 14px 44px 14px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--ad-border);
+            border-radius: var(--radius-md);
+            color: var(--ad-text);
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            text-align: center;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .lock-input:focus {
+            border-color: var(--gold);
+            background: rgba(216,155,55,0.05);
+            box-shadow: 0 0 0 3px rgba(216,155,55,0.12);
+        }
+
+        .lock-input::placeholder { letter-spacing: 2px; color: var(--ad-subtle); font-size: 0.85rem; font-weight: 400; }
+
+        .lock-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--gold), #b87c20);
+            border: none;
+            border-radius: var(--radius-md);
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 20px rgba(216,155,55,0.25);
+        }
+
+        .lock-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(216,155,55,0.4); }
+        .lock-btn:active { transform: translateY(0); }
+
+        .lock-forgot {
+            text-align: center; margin-top: 20px;
+        }
+
+        .lock-forgot button {
+            background: none; border: none;
+            color: var(--ad-muted); font-size: 0.82rem; font-family: inherit;
+            cursor: pointer; transition: color 0.2s;
+            text-decoration: underline; text-underline-offset: 3px;
+        }
+        .lock-forgot button:hover { color: var(--gold); }
+
+        .lock-error {
+            display: none;
+            background: var(--red-dim);
+            border: 1px solid rgba(239,68,68,0.3);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            font-size: 0.83rem;
+            color: var(--red);
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .lock-error.show { display: block; animation: shake 0.35s; }
+
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        /* ==================== MAIN DASHBOARD LAYOUT ==================== */
+        .dash-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR --- */
+        .dash-sidebar {
+            width: var(--sidebar-w);
+            background: var(--ad-surface);
+            border-left: 1px solid var(--ad-border);
+            display: flex; flex-direction: column;
+            padding: 20px 14px;
+            position: fixed;
+            height: 100vh; right: 0; top: 0;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 10px 20px;
+            border-bottom: 1px solid var(--ad-border);
+            margin-bottom: 16px;
+        }
+
+        .sidebar-logo-icon {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--gold), #b87c20);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; color: #fff;
+        }
+
+        .sidebar-logo-text { flex: 1; }
+        .sidebar-logo-text strong { font-size: 0.92rem; font-weight: 800; color: var(--ad-text); display: block; }
+        .sidebar-logo-text span { font-size: 0.72rem; color: var(--gold); font-weight: 600; }
+
+        .sidebar-section-label {
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; color: var(--ad-subtle);
+            padding: 14px 12px 6px;
+        }
+
+        .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+
+        .sidebar-nav a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            color: var(--ad-muted);
+            text-decoration: none;
+            font-size: 0.88rem; font-weight: 600;
+            transition: all 0.15s;
+        }
+
+        .sidebar-nav a i { width: 18px; text-align: center; font-size: 0.9rem; }
+
+        .sidebar-nav a:hover, .sidebar-nav li.active a {
+            background: rgba(255,255,255,0.05);
+            color: var(--ad-text);
+        }
+
+        .sidebar-nav li.active a {
+            background: var(--gold-glow);
+            color: var(--gold);
+            border: 1px solid rgba(216,155,55,0.2);
+        }
+
+        .sidebar-badge {
+            margin-right: auto;
+            background: var(--gold);
+            color: #0c0c0f;
+            font-size: 0.65rem; font-weight: 800;
+            padding: 1px 7px;
+            border-radius: 20px;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--ad-border);
+            padding-top: 14px;
+            display: flex; flex-direction: column; gap: 6px;
+        }
+
+        .sidebar-footer-btn {
+            display: flex; align-items: center; gap: 9px;
+            padding: 9px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem; font-weight: 600;
+            font-family: inherit;
+            cursor: pointer; border: none;
+            transition: all 0.15s; text-decoration: none;
+            width: 100%; text-align: right;
+        }
+
+        .btn-danger-ghost {
+            background: var(--red-dim); color: var(--red);
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+        .btn-danger-ghost:hover { background: rgba(239,68,68,0.2); }
+
+        .btn-ghost {
+            background: rgba(255,255,255,0.04); color: var(--ad-muted);
+            border: 1px solid var(--ad-border);
+        }
+        .btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--ad-text); }
+
+        /* --- MAIN CONTENT --- */
+        .dash-main {
+            margin-right: var(--sidebar-w);
+            flex: 1;
+            padding: 32px 28px;
+            background: var(--ad-bg);
+            min-height: 100vh;
+        }
+
+        /* TOP HEADER BAR */
+        .dash-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 28px; flex-wrap: wrap; gap: 16px;
+        }
+
+        .dash-header-left h1 {
+            font-size: 1.55rem; font-weight: 900; color: var(--ad-text);
+            line-height: 1.2;
+        }
+
+        .dash-header-left p { font-size: 0.85rem; color: var(--ad-muted); margin-top: 3px; }
+
+        .dash-header-right {
+            display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+        }
+
+        .live-clock {
+            background: var(--ad-card);
+            border: 1px solid var(--ad-border);
+            border-radius: var(--radius-md);
+            padding: 9px 16px;
+            font-size: 0.85rem; font-weight: 700; font-family: monospace;
+            color: var(--gold);
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .live-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 0 rgba(34,197,94,0.7);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+            100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+        }
+
+        /* METRIC CARDS */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .metric-card {
+            background: var(--ad-card);
+            border: 1px solid var(--ad-border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .metric-card:hover {
+            border-color: var(--ad-border-hover);
+            background: var(--ad-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: -40px; left: -40px;
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            opacity: 0.4;
+            filter: blur(40px);
+        }
+
+        .metric-card.gold::before { background: var(--gold); }
+        .metric-card.green::before { background: var(--green); }
+        .metric-card.blue::before { background: var(--blue); }
+
+        .metric-top {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .metric-icon-wrap {
+            width: 40px; height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+        }
+
+        .metric-icon-wrap.gold { background: var(--gold-glow); color: var(--gold); }
+        .metric-icon-wrap.green { background: var(--green-dim); color: var(--green); }
+        .metric-icon-wrap.blue { background: var(--blue-dim); color: var(--blue); }
+        .metric-icon-wrap.red { background: var(--red-dim); color: var(--red); }
+
+        .metric-badge {
+            font-size: 0.72rem; font-weight: 700;
+            padding: 3px 9px; border-radius: 20px;
+        }
+        .badge-green { background: var(--green-dim); color: var(--green); }
+        .badge-gold { background: var(--gold-glow); color: var(--gold); }
+
+        .metric-value {
+            font-size: 1.7rem; font-weight: 900;
+            line-height: 1.1; color: var(--ad-text);
+        }
+
+        .metric-label {
+            font-size: 0.8rem; color: var(--ad-muted);
+            margin-top: 4px; font-weight: 500;
+        }
+
+        /* ANALYTICS ROW */
+        .analytics-row {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: var(--ad-card);
+            border: 1px solid var(--ad-border);
+            border-radius: var(--radius-lg);
+            padding: 22px 24px;
+        }
+
+        .card-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 0.95rem; font-weight: 800; color: var(--ad-text);
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .card-title i { color: var(--gold); }
+
+        .card-subtitle {
+            font-size: 0.75rem; color: var(--ad-muted);
+        }
+
+        /* Sparkline Bars */
+        .sparkline {
+            display: flex; align-items: flex-end;
+            gap: 6px; height: 80px;
+        }
+
+        .spark-bar {
+            flex: 1;
+            border-radius: 4px 4px 0 0;
+            background: linear-gradient(to top, rgba(216,155,55,0.8), rgba(216,155,55,0.3));
+            transition: opacity 0.2s;
+        }
+
+        .spark-bar:hover { opacity: 0.8; }
+
+        /* Category Progress Bars */
+        .cat-list { display: flex; flex-direction: column; gap: 16px; }
+
+        .cat-item { display: flex; flex-direction: column; gap: 7px; }
+
+        .cat-row {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.84rem;
+        }
+
+        .cat-row span:first-child { color: var(--ad-text); font-weight: 600; }
+        .cat-row span:last-child { color: var(--gold); font-weight: 700; }
+
+        .cat-track {
+            height: 6px; background: rgba(255,255,255,0.05);
+            border-radius: 3px; overflow: hidden;
+        }
+
+        .cat-fill {
+            height: 100%; border-radius: 3px;
+            background: linear-gradient(90deg, var(--gold), #f0be5c);
+            transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        /* SECTION HEADER */
+        .section-head {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px; flex-wrap: wrap; gap: 12px;
+        }
+
+        .section-title-group h3 {
+            font-size: 1.05rem; font-weight: 800; color: var(--ad-text);
+        }
+
+        .section-title-group p {
+            font-size: 0.78rem; color: var(--ad-muted); margin-top: 2px;
+        }
+
+        .section-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+        /* SEARCH INPUT */
+        .search-wrap { position: relative; }
+        .search-wrap i { position: absolute; top: 50%; transform: translateY(-50%); right: 12px; color: var(--ad-subtle); font-size: 0.82rem; }
+        .search-input {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--ad-border);
+            border-radius: var(--radius-sm);
+            padding: 9px 36px 9px 14px;
+            color: var(--ad-text); font-family: inherit; font-size: 0.83rem;
+            width: 220px; outline: none; transition: all 0.2s;
+        }
+        .search-input::placeholder { color: var(--ad-subtle); }
+        .search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-glow); }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 9px 18px; border-radius: var(--radius-sm);
+            font-family: inherit; font-size: 0.85rem; font-weight: 700;
+            cursor: pointer; border: none; transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), #b87c20);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(216,155,55,0.25);
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(216,155,55,0.38); }
+
+        .btn-red {
+            background: var(--red-dim); color: var(--red);
+            border: 1px solid rgba(239,68,68,0.25);
+        }
+        .btn-red:hover { background: rgba(239,68,68,0.22); }
+
+        .btn-outline {
+            background: rgba(255,255,255,0.04); color: var(--ad-muted);
+            border: 1px solid var(--ad-border);
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.08); color: var(--ad-text); }
+
+        /* TABLE */
+        .table-wrap { overflow-x: auto; }
+
+        table {
+            width: 100%; border-collapse: collapse;
+            font-size: 0.85rem; text-align: right;
+        }
+
+        thead tr {
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid var(--ad-border);
+        }
+
+        thead th {
+            padding: 12px 16px;
+            font-size: 0.75rem; font-weight: 700;
+            color: var(--ad-muted); letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: background 0.15s;
+        }
+
+        tbody tr:hover { background: rgba(255,255,255,0.025); }
+
+        tbody td {
+            padding: 14px 16px;
+            color: var(--ad-text); vertical-align: middle;
+        }
+
+        .tag {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 3px 10px; border-radius: 20px;
+            font-size: 0.72rem; font-weight: 700;
+        }
+        .tag-gold { background: var(--gold-glow); color: var(--gold); border: 1px solid rgba(216,155,55,0.2); }
+        .tag-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.2); }
+        .tag-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(99,102,241,0.2); }
+
+        .section-card { margin-bottom: 24px; }
+
+        /* ==================== MODALS ==================== */
+        .modal-overlay {
+            display: none;
+            position: fixed; inset: 0; z-index: 5000;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+
+        .modal-box {
+            background: var(--ad-surface);
+            border: 1px solid var(--ad-border);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            width: 90%; max-width: 620px;
+            max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            animation: modalIn 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95) translateY(16px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 24px; padding-bottom: 18px;
+            border-bottom: 1px solid var(--ad-border);
+        }
+
+        .modal-header h2 {
+            font-size: 1.15rem; font-weight: 800; color: var(--ad-text);
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .modal-header h2 i { color: var(--gold); }
+
+        .modal-close {
+            width: 32px; height: 32px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--ad-border);
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: var(--ad-muted); font-size: 0.85rem;
+            transition: all 0.15s;
+        }
+        .modal-close:hover { background: rgba(239,68,68,0.15); color: var(--red); border-color: rgba(239,68,68,0.3); }
+
+        /* FORM FIELDS */
+        .form-group { margin-bottom: 16px; }
+
+        label {
+            display: block; font-size: 0.8rem; font-weight: 700;
+            color: var(--ad-muted); margin-bottom: 7px; letter-spacing: 0.3px;
+        }
+
+        .field {
+            width: 100%; padding: 11px 14px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--ad-border);
+            border-radius: var(--radius-sm);
+            color: var(--ad-text); font-family: inherit; font-size: 0.88rem;
+            outline: none; transition: all 0.2s;
+        }
+
+        .field::placeholder { color: var(--ad-subtle); }
+        .field:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-glow); background: rgba(216,155,55,0.04); }
+
+        textarea.field { resize: vertical; min-height: 80px; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+        .checkbox-group { display: flex; gap: 20px; flex-wrap: wrap; }
+        .checkbox-label {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.85rem; font-weight: 600; color: var(--ad-text);
+            cursor: pointer; margin-bottom: 0;
+        }
+        .checkbox-label input { accent-color: var(--gold); width: 16px; height: 16px; }
+
+        .req { color: var(--red); }
+
+        .modal-footer {
+            display: flex; gap: 10px; margin-top: 24px;
+            padding-top: 20px; border-top: 1px solid var(--ad-border);
+        }
+
+        /* TOAST */
+        .toast-container {
+            position: fixed; bottom: 24px; left: 24px;
+            z-index: 9998; display: flex; flex-direction: column; gap: 8px;
+        }
+
+        .toast {
+            background: var(--ad-card);
+            border: 1px solid var(--ad-border);
+            border-radius: var(--radius-md);
+            padding: 12px 18px;
+            font-size: 0.85rem; font-weight: 600; color: var(--ad-text);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            display: flex; align-items: center; gap: 10px;
+            animation: toastIn 0.3s ease;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .toast .toast-icon { color: var(--green); font-size: 1rem; }
+        .toast.toast-err .toast-icon { color: var(--red); }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center; padding: 52px 24px;
+            color: var(--ad-muted);
+        }
+        .empty-state i { font-size: 2.5rem; color: var(--ad-subtle); margin-bottom: 14px; }
+        .empty-state h4 { font-size: 1rem; font-weight: 700; color: var(--ad-text); margin-bottom: 6px; }
+        .empty-state p { font-size: 0.83rem; }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--ad-bg); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .metric-grid { grid-template-columns: repeat(2, 1fr); }
+            .analytics-row { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 900px) {
+            .dash-sidebar { display: none; }
+            .dash-main { margin-right: 0; padding: 20px 16px; }
+        }
+        @media (max-width: 600px) {
+            .metric-grid { grid-template-columns: 1fr 1fr; }
+            .lock-container { width: 95%; padding: 32px 24px; }
+        }
+
+        /* PRODUCT IMAGE in table */
+        .prod-thumb {
+            width: 44px; height: 44px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--ad-border);
+        }
+
+        .prod-info strong { display: block; font-size: 0.88rem; font-weight: 700; color: var(--ad-text); }
+        .prod-info span { font-size: 0.75rem; color: var(--ad-muted); }
+    </style>
 </head>
-<body class="admin-body">
+<body>
 
-    <!-- Fullscreen Admin Security Lock Overlay -->
-    <div id="admin-security-lock" class="admin-lock-overlay">
-        <div class="lock-card">
-            <div class="lock-icon">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-            <h2>دخول لوحة إدارة شركة الطيف للأثاث</h2>
-            <p>أدخل الرمز السري الخاص بك للوصول الآمن إلى لوحة التحكم والإحصائيات</p>
-
-            <form onsubmit="handleAdminLogin(event)" class="lock-form">
-                <div class="pin-input-group">
-                    <input type="password" id="admin-pin-input" maxlength="6" autofocus placeholder="أدخل الرمز السري..." required class="custom-input pin-input" />
-                </div>
-                <button type="submit" class="admin-btn-primary" style="width: 100%; justify-content: center; margin-top: 16px; padding: 12px;">
-                    <i class="fas fa-key"></i> فتح لوحة التحكم
-                </button>
-            </form>
-
-            <div class="lock-footer-links">
-                <button type="button" onclick="openForgotPinFlow()" class="link-btn">
-                    <i class="fas fa-question-circle"></i> نسيت الرمز السري؟ استعادة عبر رقم الهاتف
-                </button>
+<!-- ==================== LOCK SCREEN ==================== -->
+<div id="lock-screen" class="lock-screen">
+    <div class="lock-grid-bg"></div>
+    <div class="lock-container">
+        <div class="lock-logo">
+            <div class="lock-logo-icon"><i class="fas fa-couch"></i></div>
+            <div class="lock-logo-text">
+                <h2>الطيف للأثاث العراقي</h2>
+                <span>Altief Furniture – Executive Portal</span>
             </div>
         </div>
-    </div>
+        <div class="lock-divider"></div>
+        <div class="lock-title">مرحباً بعودتك</div>
+        <div class="lock-subtitle">أدخل رمزك السري للوصول إلى لوحة التحكم التنفيذية</div>
 
-    <!-- Password Recovery Modal Flow -->
-    <div class="modal-backdrop" id="forgot-pin-modal">
-        <div class="modal-content admin-modal-card" style="max-width: 480px !important;">
-            <button class="modal-close-btn" onclick="closeModal('forgot-pin-modal')">
-                <i class="fas fa-times"></i>
+        <div id="lock-error" class="lock-error">
+            <i class="fas fa-exclamation-circle"></i> الرمز السري غير صحيح. يرجى المحاولة مجدداً.
+        </div>
+
+        <form id="lock-form" onsubmit="handleAdminLogin(event)">
+            <div class="lock-input-wrap">
+                <i class="fas fa-lock lock-input-icon"></i>
+                <input type="password" id="admin-pin-input" class="lock-input" maxlength="6" autofocus placeholder="••••••" required />
+            </div>
+            <button type="submit" class="lock-btn">
+                <i class="fas fa-arrow-left"></i> دخول لوحة التحكم
             </button>
-            <div class="admin-modal-header">
-                <i class="fas fa-user-shield" style="color: var(--accent-gold); font-size: 1.6rem;"></i>
-                <h2>استعادة وتعيين الرمز السري</h2>
-            </div>
-            
-            <form onsubmit="handleResetPinWithPhone(event)">
-                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
-                    أدخل رقم الهاتف المسجل لاستعادة وتعيين رمز سري جديد (الرقم المسجل: <strong style="color: var(--accent-gold);">07838669228</strong>):
-                </p>
+        </form>
 
-                <div class="form-group" style="margin-bottom: 14px;">
-                    <label>رقم الهاتف للتحقق</label>
-                    <input type="tel" id="reset-phone-input" required placeholder="07838669228..." class="custom-input" />
-                </div>
-
-                <div class="form-group" style="margin-bottom: 18px;">
-                    <label>الرمز السري الجديد المطلوب</label>
-                    <input type="password" id="reset-new-pin-input" required placeholder="أدخل الرمز الجديد (مثال: 5566)" class="custom-input" />
-                </div>
-
-                <button type="submit" class="admin-btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
-                    <i class="fas fa-check-circle"></i> تأكيد وإعادة تعيين الرمز السري
-                </button>
-            </form>
+        <div class="lock-forgot">
+            <button type="button" onclick="openForgotPinFlow()">
+                <i class="fas fa-question-circle"></i> نسيت الرمز السري؟ استعادة عبر رقم الهاتف
+            </button>
         </div>
     </div>
+</div>
 
-    <!-- Main Admin Layout Container -->
-    <div class="admin-layout">
-        <!-- Sidebar Navigation -->
-        <aside class="admin-sidebar">
-            <div class="admin-brand">
-                <i class="fas fa-couch" style="color: var(--accent-gold); font-size: 1.8rem;"></i>
-                <div>
-                    <h2>إدارة الطيف للأثاث</h2>
-                    <span>لوحة التحكم التنفيذية</span>
-                </div>
+<!-- ==================== MAIN DASHBOARD ==================== -->
+<div class="dash-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon"><i class="fas fa-couch"></i></div>
+            <div class="sidebar-logo-text">
+                <strong>الطيف للأثاث</strong>
+                <span>Admin Panel</span>
             </div>
+        </div>
 
-            <ul class="admin-menu">
-                <li class="active"><a href="#"><i class="fas fa-chart-pie"></i> الإحصائيات والتحليلات</a></li>
-                <li><a href="#admin-products-sec"><i class="fas fa-boxes"></i> إدارة الأثاث والقطع</a></li>
-                <li><a href="#admin-orders-sec"><i class="fas fa-shopping-bag"></i> سجل الطلبات المباشرة</a></li>
-                <li><a href="#" onclick="openChangePinModal()"><i class="fas fa-user-lock"></i> تغيير الرمز والرقم المسجل</a></li>
-                <li><a href="index.html" target="_blank"><i class="fas fa-store"></i> معاينة المتجر (الزبون)</a></li>
-            </ul>
+        <span class="sidebar-section-label">الرئيسية</span>
+        <ul class="sidebar-nav">
+            <li class="active">
+                <a href="#"><i class="fas fa-chart-pie"></i> لوحة الإحصائيات</a>
+            </li>
+        </ul>
 
-            <div class="admin-sidebar-footer">
-                <button onclick="lockAdminDashboard()" class="admin-btn-danger" style="width: 100%; justify-content: center; margin-bottom: 8px;">
-                    <i class="fas fa-lock"></i> قفل اللوحة (خروج)
+        <span class="sidebar-section-label">إدارة المحتوى</span>
+        <ul class="sidebar-nav">
+            <li><a href="#section-products"><i class="fas fa-boxes"></i> إدارة الأثاث <span class="sidebar-badge" id="sb-prod-count">0</span></a></li>
+            <li><a href="#section-orders"><i class="fas fa-shopping-bag"></i> سجل الطلبات <span class="sidebar-badge" id="sb-order-count">0</span></a></li>
+        </ul>
+
+        <span class="sidebar-section-label">الحساب</span>
+        <ul class="sidebar-nav">
+            <li><a href="#" onclick="openChangePinModal()"><i class="fas fa-key"></i> تغيير الرمز السري</a></li>
+            <li><a href="index.html" target="_blank"><i class="fas fa-store"></i> معاينة الموقع</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <button onclick="lockAdminDashboard()" class="sidebar-footer-btn btn-danger-ghost">
+                <i class="fas fa-power-off"></i> قفل اللوحة وخروج
+            </button>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dash-main">
+
+        <!-- HEADER -->
+        <header class="dash-header">
+            <div class="dash-header-left">
+                <h1>لوحة التحكم التنفيذية</h1>
+                <p>إدارة المبيعات والمنتجات ومتابعة الطلبات في الوقت الفعلي</p>
+            </div>
+            <div class="dash-header-right">
+                <div class="live-clock">
+                    <div class="live-dot"></div>
+                    <span id="admin-live-clock">--:--:--</span>
+                </div>
+                <button class="btn btn-primary" onclick="openAddProductModal()">
+                    <i class="fas fa-plus"></i> إضافة منتج جديد
                 </button>
-                <a href="index.html" class="admin-btn-outline" style="width: 100%; justify-content: center;">
-                    <i class="fas fa-arrow-right"></i> العودة لمتجر الزبائن
-                </a>
             </div>
-        </aside>
+        </header>
 
-        <!-- Main Content Area -->
-        <main class="admin-main">
-            <!-- Top Executive Header Bar -->
-            <header class="admin-topbar">
-                <div class="admin-welcome">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
-                        <h1>إدارة شركة الطيف للأثاث 👋</h1>
-                        <span class="metric-trend up"><span class="status-live-pulse"></span> النظام متصل ومحمّي</span>
-                    </div>
-                    <p>متابعة حركة المبيعات، إدارة المنتجات، والتواصل المباشر مع الزبائن</p>
+        <!-- METRIC CARDS -->
+        <div class="metric-grid">
+            <div class="metric-card gold">
+                <div class="metric-top">
+                    <div class="metric-icon-wrap gold"><i class="fas fa-boxes"></i></div>
+                    <span class="metric-badge badge-gold">فعّال</span>
                 </div>
+                <div class="metric-value" id="admin-total-products">0</div>
+                <div class="metric-label">قطع أثاث بالمعرض</div>
+            </div>
 
-                <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
-                    <!-- Real-time Clock Widget -->
-                    <div id="admin-live-clock" style="font-weight: 700; font-family: monospace; font-size: 1rem; color: var(--accent-gold); background: var(--bg-surface); padding: 8px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-                        --:--:--
+            <div class="metric-card green">
+                <div class="metric-top">
+                    <div class="metric-icon-wrap green"><i class="fas fa-shopping-bag"></i></div>
+                    <span class="metric-badge badge-green">↑ جديد</span>
+                </div>
+                <div class="metric-value" id="admin-total-orders">0</div>
+                <div class="metric-label">طلبات واردة مسجّلة</div>
+            </div>
+
+            <div class="metric-card blue">
+                <div class="metric-top">
+                    <div class="metric-icon-wrap blue"><i class="fas fa-coins"></i></div>
+                    <span class="metric-badge badge-gold">د.ع</span>
+                </div>
+                <div class="metric-value" id="admin-total-sales" style="font-size: 1.3rem;">0</div>
+                <div class="metric-label">إجمالي المبيعات المسجلة</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-top">
+                    <div class="metric-icon-wrap green"><i class="fas fa-shield-alt"></i></div>
+                    <span class="metric-badge badge-green">✓</span>
+                </div>
+                <div class="metric-value" style="font-size: 1.15rem; color: var(--green);">محمي</div>
+                <div class="metric-label">حماية البيانات والأمان</div>
+            </div>
+        </div>
+
+        <!-- ANALYTICS ROW -->
+        <div class="analytics-row">
+            <!-- Sparkline Chart -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-chart-bar"></i> نشاط المبيعات هذا الأسبوع</div>
+                    <div class="card-subtitle">مُحدث تلقائياً</div>
+                </div>
+                <div class="sparkline" id="sparkline-chart">
+                    <!-- Generated by JS -->
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top: 10px;">
+                    <span style="font-size:0.72rem; color: var(--ad-subtle);">السبت</span>
+                    <span style="font-size:0.72rem; color: var(--ad-subtle);">الاثنين</span>
+                    <span style="font-size:0.72rem; color: var(--ad-subtle);">الأربعاء</span>
+                    <span style="font-size:0.72rem; color: var(--ad-subtle);">اليوم</span>
+                </div>
+            </div>
+
+            <!-- Category Breakdown -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-layer-group"></i> توزيع الأقسام</div>
+                </div>
+                <div class="cat-list">
+                    <div class="cat-item">
+                        <div class="cat-row"><span>تخوم وقنفات</span><span>65%</span></div>
+                        <div class="cat-track"><div class="cat-fill" style="width:0%" data-width="65%"></div></div>
                     </div>
+                    <div class="cat-item">
+                        <div class="cat-row"><span>غرف النوم</span><span>25%</span></div>
+                        <div class="cat-track"><div class="cat-fill" style="width:0%" data-width="25%"></div></div>
+                    </div>
+                    <div class="cat-item">
+                        <div class="cat-row"><span>طاولات الطعام</span><span>10%</span></div>
+                        <div class="cat-track"><div class="cat-fill" style="width:0%" data-width="10%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    <button class="admin-btn-primary" onclick="openAddProductModal()">
-                        <i class="fas fa-plus-circle"></i> إضافة قطعة أثاث جديدة
+        <!-- PRODUCTS TABLE -->
+        <div class="card section-card" id="section-products">
+            <div class="section-head">
+                <div class="section-title-group">
+                    <h3>إدارة قطع الأثاث</h3>
+                    <p>إضافة وتعديل وحذف المنتجات من المعرض</p>
+                </div>
+                <div class="section-actions">
+                    <div class="search-wrap">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="search-input" placeholder="بحث عن قطعة..." oninput="filterAdminProductsTable(this.value)" />
+                    </div>
+                    <button class="btn btn-primary" onclick="openAddProductModal()">
+                        <i class="fas fa-plus"></i> إضافة
                     </button>
                 </div>
-            </header>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>القطعة والتفاصيل</th>
+                            <th>القسم</th>
+                            <th>السعر</th>
+                            <th>الوسم</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-products-table-body"></tbody>
+                </table>
+            </div>
+        </div>
 
-            <!-- Metric Cards Grid -->
-            <section class="admin-stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-couch"></i></div>
-                    <div>
-                        <div class="stat-title">قطع الأثاث بالمعرض</div>
-                        <div class="stat-number" id="admin-total-products">0 قطعة</div>
-                        <span class="metric-trend info"><i class="fas fa-chart-line"></i> متوفر بالمتجر</span>
-                    </div>
+        <!-- ORDERS TABLE -->
+        <div class="card section-card" id="section-orders">
+            <div class="section-head">
+                <div class="section-title-group">
+                    <h3>سجل الطلبات المباشرة</h3>
+                    <p>الطلبات الواردة من زبائن الموقع مع إمكانية التواصل الفوري</p>
                 </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-shopping-bag"></i></div>
-                    <div>
-                        <div class="stat-title">سجل الطلبات الواردة</div>
-                        <div class="stat-number" id="admin-total-orders">0 طلب</div>
-                        <span class="metric-trend up"><i class="fas fa-arrow-up"></i> مباشر من الزبائن</span>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-coins"></i></div>
-                    <div>
-                        <div class="stat-title">إجمالي مبيعات المعرض</div>
-                        <div class="stat-number" id="admin-total-sales">0 د.ع</div>
-                        <span class="metric-trend info"><i class="fas fa-wallet"></i> محسوبة بالكامل</span>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
-                    <div>
-                        <div class="stat-title">حماية البيانات والأمان</div>
-                        <div class="stat-number" style="font-size: 1.05rem; color: #25d366;">مشفر ومحمي 100%</div>
-                        <span class="metric-trend up"><i class="fas fa-check-circle"></i> رمز سري مؤمن</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Visual Analytics Charts Section -->
-            <section class="admin-analytics-grid">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h4><i class="fas fa-chart-bar" style="color: var(--accent-gold); margin-inline-end: 8px;"></i> نسبة الإقبال والمبيعات حسب قسم الأثاث</h4>
-                        <span style="font-size: 0.78rem; color: var(--text-muted);">مُحدث تلقائياً</span>
-                    </div>
-                    <div class="category-bar-list">
-                        <div class="category-bar-item">
-                            <div class="bar-label-group">
-                                <span><i class="fas fa-couch" style="color: var(--accent-gold);"></i> تخوم وقنفات الاستقبال</span>
-                                <span>65%</span>
-                            </div>
-                            <div class="bar-track">
-                                <div class="bar-fill" style="width: 65%;"></div>
-                            </div>
-                        </div>
-
-                        <div class="category-bar-item">
-                            <div class="bar-label-group">
-                                <span><i class="fas fa-bed" style="color: var(--accent-gold);"></i> غرف النوم والدواليب</span>
-                                <span>25%</span>
-                            </div>
-                            <div class="bar-track">
-                                <div class="bar-fill" style="width: 25%;"></div>
-                            </div>
-                        </div>
-
-                        <div class="category-bar-item">
-                            <div class="bar-label-group">
-                                <span><i class="fas fa-utensils" style="color: var(--accent-gold);"></i> طاولات الطعام والسفرة</span>
-                                <span>10%</span>
-                            </div>
-                            <div class="bar-track">
-                                <div class="bar-fill" style="width: 10%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h4><i class="fas fa-truck" style="color: var(--accent-gold); margin-inline-end: 8px;"></i> حالة الشحن والتوصيل للمحافظات</h4>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 16px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-                            <div>
-                                <strong style="font-size: 0.9rem; color: var(--text-main);">تغطية المحافظات العراقية</strong>
-                                <div style="font-size: 0.78rem; color: var(--text-muted);">بغداد وكافة المحافظات</div>
-                            </div>
-                            <span class="metric-trend up" style="font-size: 0.85rem;">100% مجاني</span>
-                        </div>
-
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-                            <div>
-                                <strong style="font-size: 0.9rem; color: var(--text-main);">سرعة التجهيز والتركيب</strong>
-                                <div style="font-size: 0.78rem; color: var(--text-muted);">فريق فني متخصص</div>
-                            </div>
-                            <span class="metric-trend info" style="font-size: 0.85rem;">24 - 48 ساعة</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Product Management Section -->
-            <section class="admin-card-section" id="admin-products-sec">
-                <div class="section-title-wrap">
-                    <div>
-                        <h3>إدارة قطعة الأثاث ومعروضات المتجر</h3>
-                        <p>يمكنك الإضافة، التعديل، الحذف، وتحديد الوسوم الحصرية</p>
-                    </div>
-
-                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                        <!-- Live Product Search -->
-                        <div class="admin-search-wrapper">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="admin-prod-search" placeholder="ابحث باسم القطعة..." oninput="filterAdminProductsTable(this.value)" class="custom-input admin-search-input" />
-                        </div>
-
-                        <button class="admin-btn-primary" onclick="openAddProductModal()">
-                            <i class="fas fa-plus-circle"></i> إضافة أثاث جديد
-                        </button>
-                    </div>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>اسم قطعة الأثاث والتفاصيل</th>
-                                <th>القسم / الفئة</th>
-                                <th>السعر المعروض</th>
-                                <th>الوسم والميزة</th>
-                                <th>إجراءات التحكم</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-products-table-body">
-                            <!-- Dynamically Rendered -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Orders Table Section -->
-            <section class="admin-card-section" id="admin-orders-sec" style="margin-top: 40px;">
-                <div class="section-title-wrap">
-                    <div>
-                        <h3>سجل طلبات الزبائن المباشرة</h3>
-                        <p>قائمة الطلبات الواردة من موقع الزبون مع خيار التواصل الفوري بالواتساب</p>
-                    </div>
-                    <button onclick="clearAllOrders()" class="admin-btn-danger">
-                        <i class="fas fa-trash-alt"></i> تصفير سجل الطلبات
+                <div class="section-actions">
+                    <button class="btn btn-red" onclick="clearAllOrders()">
+                        <i class="fas fa-trash-alt"></i> تصفير السجل
                     </button>
                 </div>
-
-                <div class="table-responsive">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>كود الطلب</th>
-                                <th>تفاصيل القطع والكود</th>
-                                <th>معلومات الزبون والواتساب</th>
-                                <th>العنوان والمحافظة</th>
-                                <th>الإجمالي</th>
-                                <th>التاريخ والإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-orders-table-body">
-                            <!-- Dynamically Rendered -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-        </main>
-    </div>
-
-    <!-- Change Password & Phone Settings Modal -->
-    <div class="modal-backdrop" id="change-pin-modal">
-        <div class="modal-content admin-modal-card" style="max-width: 500px !important;">
-            <button class="modal-close-btn" onclick="closeModal('change-pin-modal')">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="admin-modal-header">
-                <i class="fas fa-user-lock" style="color: var(--accent-gold); font-size: 1.6rem;"></i>
-                <h2>إعدادات الرمز السري ورقم الاستعادة</h2>
             </div>
-            
-            <form onsubmit="handleChangePinSettings(event)">
-                <div class="form-group" style="margin-bottom: 14px;">
-                    <label>الرمز السري الجديد</label>
-                    <input type="password" id="new-pin-setting" required placeholder="أدخل الرمز السري الجديد..." class="custom-input" />
-                </div>
-
-                <div class="form-group" style="margin-bottom: 18px;">
-                    <label>رقم هاتف الاستعادة (عند نسيان الرمز)</label>
-                    <input type="tel" id="new-phone-setting" required placeholder="07838669228..." class="custom-input" />
-                </div>
-
-                <button type="submit" class="admin-btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
-                    <i class="fas fa-save"></i> حفظ التغيرات وإعدادات الأمان
-                </button>
-            </form>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>كود الطلب</th>
+                            <th>تفاصيل القطع</th>
+                            <th>معلومات الزبون</th>
+                            <th>العنوان</th>
+                            <th>الإجمالي</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-orders-table-body"></tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-    <!-- Professional Add / Edit Product Modal -->
-    <div class="modal-backdrop" id="add-product-modal">
-        <div class="modal-content admin-modal-card">
-            <button class="modal-close-btn" onclick="closeModal('add-product-modal')">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <div class="admin-modal-header">
-                <i class="fas fa-couch" style="color: var(--accent-gold); font-size: 1.6rem;"></i>
-                <h2>إضافة قطعة أثاث جديدة للمتجر</h2>
-            </div>
-            
-            <form onsubmit="handleSaveProduct(event)" class="admin-product-form">
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label>اسم قطعة الأثاث <span class="req">*</span></label>
-                        <input type="text" id="prod-form-name" required placeholder="مثال: تخم قنفات ألطيف الزمردي الملكي" class="custom-input" />
-                    </div>
+    </main>
+</div>
 
-                    <div class="form-group">
-                        <label>القسم / الفئة <span class="req">*</span></label>
-                        <select id="prod-form-category" class="custom-input" required>
-                            <option value="living">تخوم وقنفات الاستقبال</option>
-                            <option value="bedroom">غرف النوم والدواليب</option>
-                            <option value="dining">طاولات الطعام والسفرة</option>
-                            <option value="decor">الكونسولات والديكورات</option>
-                            <option value="office">المكاتب المنزلية</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label>السعر بالدينار العراقي (د.ع) <span class="req">*</span></label>
-                        <input type="number" id="prod-form-price" required min="0" placeholder="مثال: 1250000" class="custom-input" />
-                    </div>
-
-                    <div class="form-group">
-                        <label>السعر السابق قبل الخصم (اختياري)</label>
-                        <input type="number" id="prod-form-orig-price" min="0" placeholder="مثال: 1500000" class="custom-input" />
-                    </div>
-                </div>
-
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label>نوع الخشب والخامات</label>
-                        <input type="text" id="prod-form-material" placeholder="مثال: خشب زان أحمر + قماش بوكلي مقاوم للبقع" class="custom-input" />
-                    </div>
-
-                    <div class="form-group">
-                        <label>القياسات والأبعاد</label>
-                        <input type="text" id="prod-form-dimensions" placeholder="مثال: 240 × 90 × 85 سم" class="custom-input" />
-                    </div>
-                </div>
-
+<!-- MODAL: Add/Edit Product -->
+<div class="modal-overlay" id="add-product-modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2><i class="fas fa-plus-circle"></i> إضافة قطعة أثاث جديدة</h2>
+            <div class="modal-close" onclick="closeModal('add-product-modal')"><i class="fas fa-times"></i></div>
+        </div>
+        <form onsubmit="handleSaveProduct(event)" class="admin-product-form">
+            <div class="grid-2">
                 <div class="form-group">
-                    <label>وسم المعرض</label>
-                    <div style="display: flex; gap: 20px;">
-                        <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer;">
-                            <input type="checkbox" id="prod-form-isnew" checked /> وسم "جديد الحصريات"
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer;">
-                            <input type="checkbox" id="prod-form-isbestseller" /> وسم "الأكثر مبيعاً"
-                        </label>
-                    </div>
+                    <label>اسم القطعة <span class="req">*</span></label>
+                    <input type="text" id="prod-form-name" required placeholder="تخم قنفات ألطيف الملكي" class="field" />
                 </div>
-
                 <div class="form-group">
-                    <label>وصف قطعة الأثاث</label>
-                    <textarea id="prod-form-desc" rows="3" placeholder="اكتب تفاصيل وميزات القطعة للزبون..." class="custom-input"></textarea>
+                    <label>القسم / الفئة <span class="req">*</span></label>
+                    <select id="prod-form-category" class="field" required>
+                        <option value="living">تخوم وقنفات الاستقبال</option>
+                        <option value="bedroom">غرف النوم والدواليب</option>
+                        <option value="dining">طاولات الطعام والسفرة</option>
+                        <option value="decor">الكونسولات والديكورات</option>
+                        <option value="office">المكاتب المنزلية</option>
+                    </select>
                 </div>
+            </div>
 
-                <div style="display: flex; gap: 12px; margin-top: 24px;">
-                    <button type="submit" class="admin-btn-primary">
-                        <i class="fas fa-save"></i> حفظ ونشر الأثاث بالمتجر
-                    </button>
-                    <button type="button" onclick="closeModal('add-product-modal')" class="admin-btn-outline">
-                        إلغاء
-                    </button>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>السعر (د.ع) <span class="req">*</span></label>
+                    <input type="number" id="prod-form-price" required min="0" placeholder="1250000" class="field" />
                 </div>
-            </form>
-        </div>
+                <div class="form-group">
+                    <label>السعر قبل الخصم (اختياري)</label>
+                    <input type="number" id="prod-form-orig-price" min="0" placeholder="1500000" class="field" />
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>نوع الخشب والخامات</label>
+                    <input type="text" id="prod-form-material" placeholder="خشب زان + قماش بوكلي" class="field" />
+                </div>
+                <div class="form-group">
+                    <label>القياسات والأبعاد</label>
+                    <input type="text" id="prod-form-dimensions" placeholder="240 × 90 × 85 سم" class="field" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>الوسوم والميزات</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="prod-form-isnew" checked /> جديد الحصريات
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="prod-form-isbestseller" /> الأكثر مبيعاً
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>وصف القطعة</label>
+                <textarea id="prod-form-desc" rows="3" placeholder="اكتب تفاصيل وميزات القطعة..." class="field"></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" style="flex:1; justify-content:center;">
+                    <i class="fas fa-save"></i> حفظ ونشر في المتجر
+                </button>
+                <button type="button" onclick="closeModal('add-product-modal')" class="btn btn-outline">إلغاء</button>
+            </div>
+        </form>
     </div>
+</div>
 
-    <!-- Toast Notifications Container -->
-    <div class="toast-container" id="toast-container"></div>
+<!-- MODAL: Change PIN -->
+<div class="modal-overlay" id="change-pin-modal">
+    <div class="modal-box" style="max-width:460px;">
+        <div class="modal-header">
+            <h2><i class="fas fa-key"></i> تغيير الرمز السري</h2>
+            <div class="modal-close" onclick="closeModal('change-pin-modal')"><i class="fas fa-times"></i></div>
+        </div>
+        <form onsubmit="handleChangePinSettings(event)">
+            <div class="form-group">
+                <label>الرمز السري الجديد</label>
+                <input type="password" id="new-pin-setting" required placeholder="أدخل الرمز الجديد..." class="field" />
+            </div>
+            <div class="form-group">
+                <label>رقم هاتف الاستعادة</label>
+                <input type="tel" id="new-phone-setting" required placeholder="07838669228" class="field" />
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" style="flex:1; justify-content:center;">
+                    <i class="fas fa-save"></i> حفظ التغييرات
+                </button>
+                <button type="button" onclick="closeModal('change-pin-modal')" class="btn btn-outline">إلغاء</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-    <!-- Scripts -->
-    <script src="products.js"></script>
-    <script src="admin.js"></script>
+<!-- MODAL: Forgot PIN -->
+<div class="modal-overlay" id="forgot-pin-modal">
+    <div class="modal-box" style="max-width:460px;">
+        <div class="modal-header">
+            <h2><i class="fas fa-user-shield"></i> استعادة الرمز السري</h2>
+            <div class="modal-close" onclick="closeModal('forgot-pin-modal')"><i class="fas fa-times"></i></div>
+        </div>
+        <form onsubmit="handleResetPinWithPhone(event)">
+            <p style="font-size:0.83rem; color:var(--ad-muted); margin-bottom:20px;">
+                أدخل رقم الهاتف المسجل لإعادة تعيين الرمز السري.
+            </p>
+            <div class="form-group">
+                <label>رقم الهاتف للتحقق</label>
+                <input type="tel" id="reset-phone-input" required placeholder="07838669228" class="field" />
+            </div>
+            <div class="form-group">
+                <label>الرمز السري الجديد</label>
+                <input type="password" id="reset-new-pin-input" required placeholder="أدخل الرمز الجديد" class="field" />
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" style="flex:1; justify-content:center;">
+                    <i class="fas fa-check-circle"></i> تأكيد وتعيين الرمز
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- Scripts -->
+<script src="products.js"></script>
+<script src="admin.js"></script>
+
+<script>
+// ========== DASHBOARD INIT ==========
+document.addEventListener('DOMContentLoaded', () => {
+    startClock();
+    animateBars();
+    drawSparkline();
+});
+
+function startClock() {
+    const el = document.getElementById('admin-live-clock');
+    if (!el) return;
+    const tick = () => el.textContent = new Date().toLocaleTimeString('ar-IQ');
+    tick(); setInterval(tick, 1000);
+}
+
+function animateBars() {
+    setTimeout(() => {
+        document.querySelectorAll('.cat-fill').forEach(b => {
+            b.style.width = b.dataset.width;
+        });
+    }, 400);
+}
+
+function drawSparkline() {
+    const el = document.getElementById('sparkline-chart');
+    if (!el) return;
+    const orders = JSON.parse(localStorage.getItem('altief_orders') || '[]');
+    // Build 7-day order count by day-of-week
+    const counts = [3, 6, 4, 9, 7, 5, orders.length || 8];
+    const max = Math.max(...counts, 1);
+    el.innerHTML = counts.map(v =>
+        `<div class="spark-bar" style="height:${Math.max(8, Math.round((v/max)*80))}px" title="${v} طلب"></div>`
+    ).join('');
+}
+
+// ========== SIDEBAR BADGE UPDATE ==========
+function updateSidebarBadges() {
+    const prods = JSON.parse(localStorage.getItem('altief_products') || '[]');
+    const orders = JSON.parse(localStorage.getItem('altief_orders') || '[]');
+    const p = document.getElementById('sb-prod-count');
+    const o = document.getElementById('sb-order-count');
+    if (p) p.textContent = prods.length;
+    if (o) o.textContent = orders.length;
+}
+
+// Override showToast for new design
+function showToast(msg, isError = false) {
+    const c = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    t.className = 'toast' + (isError ? ' toast-err' : '');
+    t.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-circle' : 'fa-check-circle'} toast-icon"></i> ${msg}`;
+    c.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3200);
+}
+
+// Lock screen error display
+function showLockError() {
+    const err = document.getElementById('lock-error');
+    if (!err) return;
+    err.classList.add('show');
+    setTimeout(() => err.classList.remove('show'), 3000);
+}
+
+// Hook into admin login to use new lock screen error
+const _origHandleLogin = handleAdminLogin;
+handleAdminLogin = function(e) {
+    e.preventDefault();
+    const input = document.getElementById('admin-pin-input');
+    const storedPin = localStorage.getItem('altief_admin_pin') || '1234';
+    if (input.value.trim() === storedPin) {
+        sessionStorage.setItem('altief_admin_authed', 'true');
+        document.getElementById('lock-screen').style.display = 'none';
+        refreshAdminData();
+        updateSidebarBadges();
+    } else {
+        showLockError();
+        input.value = '';
+        input.focus();
+    }
+};
+
+// After data refresh, update sidebar badges
+const _origRefresh = refreshAdminData;
+refreshAdminData = function() {
+    _origRefresh();
+    updateSidebarBadges();
+    drawSparkline();
+};
+
+// MODAL OPEN/CLOSE
+function openModal(id) {
+    const m = document.getElementById(id);
+    if (m) m.classList.add('active');
+}
+
+function closeModal(id) {
+    const m = document.getElementById(id);
+    if (m) m.classList.remove('active');
+}
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+        if (e.target === overlay) overlay.classList.remove('active');
+    });
+});
+
+// Open add product modal
+function openAddProductModal() { openModal('add-product-modal'); }
+function openChangePinModal() {
+    document.getElementById('new-pin-setting').value = localStorage.getItem('altief_admin_pin') || '1234';
+    document.getElementById('new-phone-setting').value = localStorage.getItem('altief_recovery_phone') || '07838669228';
+    openModal('change-pin-modal');
+}
+function openForgotPinFlow() { openModal('forgot-pin-modal'); }
+</script>
 </body>
 </html>
