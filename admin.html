@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الإدارة والإحصائيات | شركة الطيف للأثاث</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+    <!-- Fullscreen Admin Security Lock Overlay -->
+    <div id="admin-security-lock" class="admin-lock-overlay">
+        <div class="lock-card">
+            <div class="lock-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h2>دخول لوحة إدارة شركة الطيف للأثاث</h2>
+            <p>يرجى أدخال الرمز السري الخاص بك لإلغاء القفل (الافتراضي: <strong>1234</strong>)</p>
+
+            <form onsubmit="handleAdminLogin(event)" class="lock-form">
+                <div class="pin-input-group">
+                    <input type="password" id="admin-pin-input" maxlength="6" autofocus placeholder="أدخل الرمز السري..." required class="custom-input pin-input" />
+                </div>
+                <button type="submit" class="checkout-btn" style="background: var(--accent-gold); width: 100%; margin-top: 15px;">
+                    <i class="fas fa-key"></i> فتح لوحة التحكم
+                </button>
+            </form>
+
+            <div class="lock-footer-links">
+                <button type="button" onclick="openForgotPinFlow()" class="link-btn">
+                    <i class="fas fa-question-circle"></i> نسيت الرمز السري؟ استعادة عبر رقم الهاتف
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Recovery Modal Flow -->
+    <div class="modal-backdrop" id="forgot-pin-modal">
+        <div class="modal-content admin-modal-card" style="max-width: 480px !important;">
+            <button class="modal-close-btn" onclick="closeModal('forgot-pin-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="admin-modal-header">
+                <i class="fas fa-shield-alt" style="color: var(--accent-gold); font-size: 1.6rem;"></i>
+                <h2>استعادة وتعيين الرمز السري</h2>
+            </div>
+            
+            <form onsubmit="handleResetPinWithPhone(event)">
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+                    أدخل رقم الهاتف المسجل لاستعادة وتعيين رمز سري جديد (الرقم المسجل: <strong style="color: var(--accent-gold);">07838669228</strong>):
+                </p>
+
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>رقم الهاتف للتحقق</label>
+                    <input type="tel" id="reset-phone-input" required placeholder="07838669228..." class="custom-input" />
+                </div>
+
+                <div class="form-group" style="margin-bottom: 18px;">
+                    <label>الرمز السري الجديد المطلوبة</label>
+                    <input type="password" id="reset-new-pin-input" required placeholder="أدخل الرمز الجديد (مثال: 5566)" class="custom-input" />
+                </div>
+
+                <button type="submit" class="checkout-btn" style="background: var(--accent-gold); width: 100%;">
+                    <i class="fas fa-check-circle"></i> تأكيد وإعادة تعيين الرمز السري
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Admin Layout Container -->
+    <div class="admin-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <i class="fas fa-user-shield" style="color: var(--accent-gold); font-size: 1.8rem;"></i>
+                <div>
+                    <h2>إدارة الطيف للأثاث</h2>
+                    <span>لوحة التحكم الرئيسية</span>
+                </div>
+            </div>
+
+            <ul class="admin-menu">
+                <li class="active"><a href="#"><i class="fas fa-chart-line"></i> الإحصائيات العامة</a></li>
+                <li><a href="#admin-products-sec"><i class="fas fa-couch"></i> إدارة الأثاث والقطع</a></li>
+                <li><a href="#admin-orders-sec"><i class="fas fa-shopping-cart"></i> سجل الطلبات</a></li>
+                <li><a href="#" onclick="openChangePinModal()"><i class="fas fa-user-lock"></i> تغيير الرمز والرقم المسجل</a></li>
+                <li><a href="index.html" target="_blank"><i class="fas fa-external-link-alt"></i> معاينة المتجر (الزبون)</a></li>
+            </ul>
+
+            <div class="admin-sidebar-footer">
+                <button onclick="lockAdminDashboard()" class="checkout-btn" style="background: rgba(230,57,70,0.15); color: #e63946; border: 1px solid #e63946; text-align: center; width: 100%; margin-bottom: 10px; cursor: pointer;">
+                    <i class="fas fa-lock"></i> قفل اللوحة (خروج)
+                </button>
+                <a href="index.html" class="checkout-btn" style="background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); text-align: center; text-decoration: none; display: block;">
+                    <i class="fas fa-arrow-right"></i> العودة لمتجر الزبائن
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="admin-main">
+            <!-- Top Bar -->
+            <header class="admin-topbar">
+                <div class="admin-welcome">
+                    <h1>أهلاً بك في لوحة تحكم شركة الطيف للأثاث 👋</h1>
+                    <p>إدارة المنتجات، رفع قطع الأثاث، ومتابعة الطلبات المباشرة</p>
+                </div>
+
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <button class="checkout-btn" onclick="openAddProductModal()" style="background: var(--accent-gold); white-space: nowrap;">
+                        <i class="fas fa-plus-circle"></i> إضافة قطعة أثاث جديدة
+                    </button>
+                </div>
+            </header>
+
+            <!-- Stats Widgets Grid -->
+            <section class="admin-stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-couch"></i></div>
+                    <div>
+                        <div class="stat-title">قطع الأثاث بالمعرض</div>
+                        <div class="stat-number" id="admin-total-products">0 قطعة</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-shopping-bag"></i></div>
+                    <div>
+                        <div class="stat-title">عدد الطلبات</div>
+                        <div class="stat-number" id="admin-total-orders">0 طلب</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                    <div>
+                        <div class="stat-title">إجمالي المبيعات</div>
+                        <div class="stat-number" id="admin-total-sales">0 د.ع</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div>
+                        <div class="stat-title">حالة الأمان</div>
+                        <div class="stat-number" style="color: #25d366; font-size: 1.1rem;">مفرس ومحمي بكلمة مرور</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Management Section -->
+            <section class="admin-card-section" id="admin-products-sec">
+                <div class="section-title-wrap">
+                    <div>
+                        <h3>إدارة قطع الأثاث والمعروضات</h3>
+                        <p>يمكنك التعديل، الحذف، أو إضافة قطع جديدة مع الصور</p>
+                    </div>
+                    <button class="checkout-btn" onclick="openAddProductModal()" style="background: var(--accent-gold); max-width: 200px;">
+                        <i class="fas fa-plus-circle"></i> إضافة أثاث جديد
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>اسم قطعة الأثاث والتفاصيل</th>
+                                <th>القسم</th>
+                                <th>السعر</th>
+                                <th>الوسم</th>
+                                <th>إجراءات الإدارة</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-products-table-body">
+                            <!-- Dynamically Rendered -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Orders Table Section -->
+            <section class="admin-card-section" id="admin-orders-sec" style="margin-top: 40px;">
+                <div class="section-title-wrap">
+                    <div>
+                        <h3>سجل طلبات الزبائن المباشرة</h3>
+                        <p>قائمة الطلبات الواردة من موقع الزبون والواتساب</p>
+                    </div>
+                    <button onclick="clearAllOrders()" class="action-btn" style="background: rgba(230,57,70,0.15); color: #e63946; border: 1px solid #e63946; padding: 8px 16px; border-radius: var(--radius-md); font-weight: 700; cursor: pointer;">
+                        <i class="fas fa-trash-alt"></i> تصفير سجل الطلبات
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>كود الطلب الفريد</th>
+                                <th>تفاصيل القطع والكود الفرعي</th>
+                                <th>معلومات الزبون</th>
+                                <th>العنوان والمحافظة</th>
+                                <th>الإجمالي</th>
+                                <th>التاريخ والتغيير</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-orders-table-body">
+                            <!-- Dynamically Rendered -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Change Password & Phone Settings Modal -->
+    <div class="modal-backdrop" id="change-pin-modal">
+        <div class="modal-content admin-modal-card" style="max-width: 500px !important;">
+            <button class="modal-close-btn" onclick="closeModal('change-pin-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="admin-modal-header">
+                <i class="fas fa-user-lock" style="color: var(--accent-gold); font-size: 1.6rem;"></i>
+                <h2>إعدادات الرمز السري ورقم الاستعادة</h2>
+            </div>
+            
+            <form onsubmit="handleChangePinSettings(event)">
+                <div class="form-group" style="margin-bottom: 14px;">
+                    <label>الرمز السري الجديد</label>
+                    <input type="password" id="new-pin-setting" required placeholder="أدخل الرمز السري الجديد..." class="custom-input" />
+                </div>
+
+                <div class="form-group" style="margin-bottom: 18px;">
+                    <label>رقم هاتف الاستعادة (عند نسيان الرمز)</label>
+                    <input type="tel" id="new-phone-setting" required placeholder="07838669228..." class="custom-input" />
+                </div>
+
+                <button type="submit" class="checkout-btn" style="background: var(--accent-gold); width: 100%;">
+                    <i class="fas fa-save"></i> حفظ التغيرات وإعدادات الأمان
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Professional Add / Edit Product Modal -->
+    <div class="modal-backdrop" id="add-product-modal">
+        <div class="modal-content admin-modal-card">
+            <button class="modal-close-btn" onclick="closeModal('add-product-modal')">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="admin-modal-header">
+                <i class="fas fa-couch" style="color: var(--accent-gold); font-size: 1.6rem;"></i>
+                <h2>إضافة قطعة أثاث جديدة للمتجر</h2>
+            </div>
+            
+            <form onsubmit="handleSaveProduct(event)" class="admin-product-form">
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label>اسم قطعة الأثاث <span class="req">*</span></label>
+                        <input type="text" id="prod-form-name" required placeholder="مثال: تخم قنفات ألطيف الزمردي الملكي" class="custom-input" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>القسم / الفئة <span class="req">*</span></label>
+                        <select id="prod-form-category" class="custom-input" required>
+                            <option value="living">تخوم وقنفات الاستقبال</option>
+                            <option value="bedroom">غرف النوم والدواليب</option>
+                            <option value="dining">طاولات الطعام والسفرة</option>
+                            <option value="decor">الكونسولات والديكورات</option>
+                            <option value="office">المكاتب المنزلية</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label>السعر بالدينار العراقي (د.ع) <span class="req">*</span></label>
+                        <input type="number" id="prod-form-price" required min="0" placeholder="مثال: 1250000" class="custom-input" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>السعر السابق قبل الخصم (اختياري)</label>
+                        <input type="number" id="prod-form-orig-price" min="0" placeholder="مثال: 1500000" class="custom-input" />
+                    </div>
+                </div>
+
+
+
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label>نوع الخشب والخامات</label>
+                        <input type="text" id="prod-form-material" placeholder="مثال: خشب زان أحمر + قماش بوكلي مقاوم للبقع" class="custom-input" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>القياسات والأبعاد</label>
+                        <input type="text" id="prod-form-dimensions" placeholder="مثال: 240 × 90 × 85 سم" class="custom-input" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>وسم المعرض</label>
+                    <div style="display: flex; gap: 20px;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer;">
+                            <input type="checkbox" id="prod-form-isnew" checked /> وسم "جديد الحصريات"
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; cursor: pointer;">
+                            <input type="checkbox" id="prod-form-isbestseller" /> وسم "الأكثر مبيعاً"
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>وصف قطعة الأثاث</label>
+                    <textarea id="prod-form-desc" rows="3" placeholder="اكتب تفاصيل وميزات القطعة للزبون..." class="custom-input"></textarea>
+                </div>
+
+                <div style="display: flex; gap: 12px; margin-top: 24px;">
+                    <button type="submit" class="checkout-btn" style="background: var(--accent-gold);">
+                        <i class="fas fa-save"></i> حفظ ونشر الأثاث بالمتجر
+                    </button>
+                    <button type="button" onclick="closeModal('add-product-modal')" class="checkout-btn" style="background: rgba(255,255,255,0.1); border: 1px solid var(--border-color);">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="products.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
